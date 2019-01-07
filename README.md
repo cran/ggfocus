@@ -21,10 +21,11 @@ tidyverse/ggplot2.
 Installing ggfocus
 ------------------
 
-The package is not available in CRAN (yet), but you can install it from
-github with [devtools](https://github.com/hadley/devtools).
+The package is available on CRAN, but you can also install the latest
+version from github with [devtools](https://github.com/hadley/devtools).
 
-    devtools::install_github("Freguglia/ggfocus")
+    devtools::install_github("Freguglia/ggfocus") # Latest version
+    install.packages("ggfocus") # CRAN version
 
 Usage
 -----
@@ -51,6 +52,11 @@ Usage
 -   **color\_other**: color for levels not selected.
 -   **alpha\_focus** and **alpha\_other**: alpha for selcted and not
     selected levels, respectively.
+
+You can also use the usual `ggplot2` grammar `+` to add scales with the
+family of function `scale_*_focus()`. These two uses are equivalent,
+read the [vignette](vignettes/a-quick-guide-to-ggfocus.html) for more
+information.
 
 Examples
 --------
@@ -81,16 +87,7 @@ We can also highlight countries
 
 Because **ggfocus()** retuns a modified **ggplot** object, other ggplot
 extensions can used with it, for example,
-[gganimate](https://github.com/dgrtwo/gganimate).
-
-    library(gganimate)
-    p <- ggplot(gapminder, aes(x=log(gdpPercap), y=lifeExp, size=pop, frame=year)) + geom_point()
-    focus_p <- ggfocus(p,country,c("Brazil","Argentina"), color_focus = c("Green","Blue"))
-    gganimate(focus_p,interval=.2)
-
-<img src="man/figures/focus_gapminder.gif" width="600px" />
-
-#### Using ggfocus with ggmaps
+[ggmap](https://cran.r-project.org/web/packages/ggmap/).
 
     library(ggmap)
     library(maps)
@@ -100,4 +97,16 @@ extensions can used with it, for example,
     ggfocus(p, region, c("Brazil","India","Italy","Canada"),focus_aes = c("fill","alpha"),
             color_focus = "blue", alpha_other = 0.15) + guides(fill=FALSE)
 
-![](man/figures/README-unnamed-chunk-6-1.png)
+![](man/figures/README-unnamed-chunk-4-1.png)
+
+Contributing and Bug Reports
+============================
+
+-   If you find any unexpected result or bug, please file an issue with
+    a reproducible example.
+-   For new features, for example, the addition of the focus scale for a
+    new aesthetics, file and issue and add and example or a brief
+    explanation with important aspects for the focus scale of this new
+    aesthetics.
+-   If you want to contribute somehow, please contact me or file an
+    issue so we can coordinate.
