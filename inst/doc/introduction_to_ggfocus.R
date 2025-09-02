@@ -1,4 +1,4 @@
-## ---- include = FALSE---------------------------------------------------------
+## ----include = FALSE----------------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -24,24 +24,24 @@ ggplot(df, aes(x = u1, y = u2, color = grp)) +
 
 ## ----bad_filter---------------------------------------------------------------
 library(dplyr)
-df %>% 
-  filter(grp %in% c("A", "B")) %>%
+df |> 
+  filter(grp %in% c("A", "B")) |>
   ggplot(aes(x = u1, y = u2, color = grp)) +
   geom_point()
 
 ## ----base_solution------------------------------------------------------------
-df %>%
-  mutate(grp = ifelse(grp %in% c("A", "B"), as.character(grp), "other")) %>%
+df |>
+  mutate(grp = ifelse(grp %in% c("A", "B"), as.character(grp), "other")) |>
   ggplot(aes(x = u1, y = u2, color = grp)) +
   geom_point() +
   scale_color_manual(values = c("A" = "red", "B" = "blue", "other" = "gray"))
 
 ## ----color_focus_usage, eval = FALSE------------------------------------------
-#  scale_color_focus(focus_levels, color_focus = NULL,
-#                    color_other = "gray", palette_focus = "Set1")
-#  
-#  scale_fill_focus(focus_levels, color_focus = NULL,
-#    color_other = "gray", palette_focus = "Set1")
+# scale_color_focus(focus_levels, color_focus = NULL,
+#                   color_other = "gray", palette_focus = "Set1")
+# 
+# scale_fill_focus(focus_levels, color_focus = NULL,
+#   color_other = "gray", palette_focus = "Set1")
 
 ## ----example_color------------------------------------------------------------
 ggplot(df, aes(x = u1, y = u2, color = grp)) +
@@ -58,7 +58,7 @@ ggplot(df, aes(x = u1, y = u2, color = grp)) +
   scale_color_focus(c("A", "B"), color_focus = "red")
 
 ## ----alpha_focus_usage, eval = FALSE------------------------------------------
-#  scale_alpha_focus(focus_levels, alpha_focus = 1, alpha_other = 0.2)
+# scale_alpha_focus(focus_levels, alpha_focus = 1, alpha_other = 0.2)
 
 ## ----example_alpha------------------------------------------------------------
 ggplot(df, aes(x = u1, y = u2, alpha = grp)) +
@@ -73,7 +73,7 @@ ggplot(df, aes(x = u1, y = u2, alpha = grp, color = grp)) +
   theme_bw() # White background
 
 ## ----usage_linetype, eval = FALSE---------------------------------------------
-#  scale_linetype_focus(focus_levels, linetype_focus = 1, linetype_other = 3)
+# scale_linetype_focus(focus_levels, linetype_focus = 1, linetype_other = 3)
 
 ## ----example_linetype---------------------------------------------------------
 ggplot(datasets::airquality, aes(x = Day, y = Temp, linetype = factor(Month),
@@ -88,7 +88,7 @@ ggplot(datasets::airquality, aes(x = Day, y = Temp, linetype = factor(Month),
   scale_linetype_focus(focus_levels = c(5,7), linetype_focus = c(1,5))
 
 ## ----usage_shape, eval = FALSE------------------------------------------------
-#  scale_shape_focus(focus_levels, shape_focus = 8, shape_other = 1)
+# scale_shape_focus(focus_levels, shape_focus = 8, shape_other = 1)
 
 ## ----example_shape------------------------------------------------------------
 ggplot(df, aes(x = u1, y = u2, shape = grp)) + 
@@ -101,7 +101,7 @@ ggplot(df, aes(x = u1, y = u2, shape = grp)) +
   scale_shape_focus(c("A", "B"), shape_focus = c(2,3))
 
 ## ----usage_size, eval = FALSE-------------------------------------------------
-#  scale_size_focus(focus_levels, size_focus = 3, size_other = 1)
+# scale_size_focus(focus_levels, size_focus = 3, size_other = 1)
 
 ## ----example_usage------------------------------------------------------------
 ggplot(df, aes(x = u1, y = u2, size = grp)) + 
@@ -117,8 +117,8 @@ ggplot(df, aes(x = u1, y = u2, size = grp, shape = grp)) +
 ## ----example_ggrepel----------------------------------------------------------
 library(dplyr)
 library(ggrepel)
-iris %>% 
-  mutate(id = row_number()) %>%
+iris |> 
+  mutate(id = row_number()) |>
   ggplot(aes(x = Petal.Length, y = Sepal.Length, label = id, size = id)) +
   geom_text_repel() +
   scale_size_focus(c(100,127), size_focus = 8, size_other = 2)

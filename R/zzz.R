@@ -1,13 +1,9 @@
-#' @importFrom dplyr select_ mutate
+#' @importFrom dplyr mutate
 #' @importFrom ggplot2 aes scale_alpha_manual scale_color_manual
 #' scale_fill_manual scale_size_manual scale_shape_manual
 #' scale_linetype_manual
 #' @importFrom rlang enquo
-#' @importFrom magrittr %>%
 NULL
-
-#' @export
-magrittr::'%>%'
 
 #' @importFrom ggplot2 ggplot_add
 #' @export

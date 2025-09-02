@@ -22,7 +22,7 @@ scale_size_focus <- function(focus_levels,
 
 #' @export
 #' @method ggplot_add ggfocus_size
-ggplot_add.ggfocus_size <- function(object, plot, object_name){
+ggplot_add.ggfocus_size <- function(object, plot, ...){
 
   p1 <- plot
   focus_levels <- object$focus_levels
@@ -34,7 +34,7 @@ ggplot_add.ggfocus_size <- function(object, plot, object_name){
     stop("'size' isn't mapped by any variable. Use '+ aes(size = ...)' before setting the focus scale.")
   }
 
-  p1$data <- p1$data %>%
+  p1$data <- p1$data |>
     mutate(.marker_size = ifelse(as.character(!!var) %in% focus_levels,
                                   as.character(!!var), "Other"))
 
@@ -47,10 +47,10 @@ ggplot_add.ggfocus_size <- function(object, plot, object_name){
   }
 
 
-  n_levels <- p1$data$.marker_size %>% unique() %>% length()
+  n_levels <- p1$data$.marker_size |> unique() |> length()
 
   size_values <- rep(size_focus, n_levels)
-  names(size_values) <- p1$data$.marker_size %>% unique()
+  names(size_values) <- p1$data$.marker_size |> unique()
   size_values["Other"] <- size_other
 
   p1 <- p1 +
